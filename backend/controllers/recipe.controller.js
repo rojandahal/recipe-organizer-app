@@ -21,7 +21,6 @@ exports.getRecipes = asyncHandler(async (req, res, next) => {
 exports.getMyPublicRecipe = asyncHandler(async (req, res, next) => {
   // Find the Recipe by userId
   const recipe = await Recipe.find({ user: req.user._id, ispublic: true });
-  
   // If there is no recipe
   if (!recipe) {
     return next(
