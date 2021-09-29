@@ -1,0 +1,10 @@
+.credentials {
+  display: flex;
+  justify-content: right;
+  align-items: right;
+}
+
+.menu {
+  display: flex;
+}
+

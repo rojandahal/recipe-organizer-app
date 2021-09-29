@@ -1,0 +1,7 @@
+.features_footer {
+  display: flex;
+  color: white;
+  justify-content: center;
+  background-color: #1b1c1d;
+  padding: 10px;
+}

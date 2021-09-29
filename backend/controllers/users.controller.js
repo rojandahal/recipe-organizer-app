@@ -4,19 +4,19 @@ const { sendResponse } = require("../helpers/response");
 // asyncHandler import
 const asyncHandler = require("../helpers/asyncHandler");
 
-// Model futsal
+// Model recipe
 const User = require("../models/user.model");
 const ApiError = require("../errors/ApiError");
 
-//@des      Get all futsals
-//@route    GET /api/v1/futsals
+//@des      Get all users
+//@route    GET /api/v1/user
 //@access   Public
 exports.getUsers = asyncHandler(async (req, res, next) => {
   return sendResponse(res, res.advanceResults, 200, "application/json");
 });
 
-//@des      Get single futsals
-//@route    GET /api/v1/futsals/:id
+//@des      Get single users
+//@route    GET /api/v1/user/:id
 //@access   Public
 exports.getUser = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.params.id);
@@ -61,9 +61,11 @@ exports.createUser = asyncHandler(async (req, res, next) => {
 //@access   Private/admin
 
 exports.updateUser = asyncHandler(async (req, res, next) => {
+
   const user = await User.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
+    
   });
 
   if (!user) {
@@ -76,7 +78,7 @@ exports.updateUser = asyncHandler(async (req, res, next) => {
 });
 
 //@des      Delete user
-//@route    Delete /api/v1/users/:id
+//@route    Delete /api/v1/user/:id
 //@access   Private: admin
 exports.deleteUser = asyncHandler(async (req, res, next) => {
   const user = await User.findByIdAndDelete(req.params.id);

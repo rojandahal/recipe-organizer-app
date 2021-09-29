@@ -49,11 +49,6 @@ exports.getRecipe = asyncHandler(async (req, res, next) => {
     return next(ApiError.notfound(`id of ${req.params.id} couldn't found.`));
   }
 
-  //   recipe = await recipe.populate({
-  //     path: "recipe",
-  //     select: "title description servings steps",
-  //   });
-
   return sendResponse(
     res,
     {
@@ -69,7 +64,17 @@ exports.getRecipe = asyncHandler(async (req, res, next) => {
 //@route    POST /api/v1/recipe
 //@access   Private: [admin, owner]
 exports.createRecipe = asyncHandler(async (req, res, next) => {
-  //req.body.user = req.user.id;
+  
+  req.body.user = req.user._id;
+  req.body.username = req.user.username;
+
+  if (req.body.ispublic === true && req.user.role === "user") {
+    return next(
+      ApiError.notfound(
+        `User of username: ${req.body.username} cannot create public recipe.`
+      )
+    );
+  }
 
   const recipe = await Recipe.create(req.body);
 
@@ -96,9 +101,23 @@ exports.updateRecipe = asyncHandler(async (req, res, next) => {
     );
   }
 
+  if (!(req.body.username === req.user.username)) {
+    return next(
+      ApiError.notfound(`User of username: ${req.body.username} not found.`)
+    );
+  }
+
   if (recipe.user.toString() !== req.user.id) {
     return next(
       ApiError.unauthorized(`User of id ${req.user.id} is unauthorized.`)
+    );
+  }
+
+  if (req.body.ispublic === true && req.user.role === "user") {
+    return next(
+      ApiError.notfound(
+        `User of username: ${req.body.username} cannot create public recipe.`
+      )
     );
   }
 
@@ -144,6 +163,35 @@ exports.deleteRecipe = asyncHandler(async (req, res, next) => {
       status: "Sucess",
       data: [],
       message: "Deletetion sucess.",
+    },
+    200,
+    "application/json"
+  );
+});
+
+//@des      Search Recipe using regex
+//@route    Get /api/v1/recipe/search/?title=
+//@access   Private: [admin, owner]
+exports.searchRecipe = asyncHandler(async (req, res, next) => {
+  const searchField = req.query.title;
+
+  const recipe = await Recipe.find({
+    title: { $regex: searchField, $options: "$i" },
+  });
+  // console.log(recipe)
+
+  if (!recipe) {
+    return next(
+      ApiError.notfound(`Recipe name of ${req.query.name} couldn't found.`)
+    );
+  }
+
+  return sendResponse(
+    res,
+    {
+      status: "Sucess",
+      data: recipe,
+      message: "Search sucess.",
     },
     200,
     "application/json"

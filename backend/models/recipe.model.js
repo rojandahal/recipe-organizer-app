@@ -12,7 +12,7 @@ const recipeSchema = new Schema(
     description: {
       type: String,
       required: [true, "Please add description"],
-      maxlength: [500, "Description  cannot be more than 50 characters."],
+      maxlength: [500, "Description  cannot be more than 500 characters."],
     },
     servings: {
       type: Number,
@@ -24,8 +24,12 @@ const recipeSchema = new Schema(
         required: [true, "Please add ingredients"],
       },
       quantity: {
-        type: Number,
+        type: String,
         required: [true, "Please add quantity"],
+      },
+      unit: {
+        type: String,
+        required: [true, "Please add ingredients"],
       },
     }],
     steps: {
@@ -44,12 +48,12 @@ const recipeSchema = new Schema(
     ispublic: {
       type: Boolean,
       enum: [true, false],
-      default: false,
+      default: true,
     },
     averageRating: {
       type: Number,
       min: [1, "Rating must be at least 1"],
-      max: [10, "Rating must cannot be more than 10"],
+      max: [5, "Rating must cannot be more than 5"],
       default: 1
     },
     review: {
@@ -58,6 +62,11 @@ const recipeSchema = new Schema(
     },
     user: {
       type: mongoose.Schema.ObjectId,
+      ref: "Users",
+      required: true,
+    },
+    username:{
+      type: String,
       ref: "Users",
       required: true,
     },

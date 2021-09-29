@@ -1,0 +1,30 @@
+.loginbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.content {
+  font-family: "Open Sans";
+  color: #df6870;
+}
+
+.ui.teal.button {
+  text-decoration: none;
+  background-color: #df6870;
+  color: #ffffff;
+  text-shadow: none;
+}
+
+.ui.teal.button:hover {
+  text-decoration: none;
+  background-color: #ad4e54;
+  color: #ffffff;
+  text-shadow: none;
+}
+
+.button {
+  font-family: "Open Sans";
+  background-color: #df6870;
+}

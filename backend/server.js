@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const cookieParser = require('cookie-parser');
+const cookieParser = require("cookie-parser");
 const errorHandler = require("./errors/api-error-handler");
 
 // Initializing environment vairables
@@ -10,11 +10,18 @@ require("dotenv").config();
 const app = express();
 
 //Body parser
-app.use(cors());
+// Use of cors
+app.use(
+  cors({
+    origin: "http://localhost:3001",
+    methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD", "DELETE"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 // Cookies parser
-app.use(cookieParser())
+app.use(cookieParser());
 
 //Connecting database
 const uri = process.env.ATLAS_URI;
@@ -33,11 +40,13 @@ connection.once("open", () => {
 const usersRoutes = require("../backend/routes/users");
 const authRoutes = require("../backend/routes/auth");
 const recipeRoutes = require("../backend/routes/recipe");
+const favouriteRoutes = require ("../backend/routes/favourite");
 
 //Adding routes middleware
 app.use("/api/v1/user", usersRoutes);
-app.use('/api/v1/auth', authRoutes);
+app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/recipe", recipeRoutes);
+app.use("/api/v1/favourite",favouriteRoutes)
 
 //Error handler
 app.use(errorHandler);

@@ -6,7 +6,7 @@ const User = require("../models/user.model");
 // Protect routes
 exports.protect = asyncHandler(async (req, res, next) => {
   let token;
-  console.log(req.cookies);
+  //console.log(req.cookies.token);
 
   if (
     req.headers.authorization &&
@@ -28,6 +28,7 @@ exports.protect = asyncHandler(async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     req.user = await User.findById(decoded.id);
+    // console.log(req.user._id);
     next();
   } catch (err) {
     return next(ApiError.unauthorized("Assess Denied."));

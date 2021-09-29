@@ -7,7 +7,8 @@ const {
     getMyPublicRecipe,
     createRecipe,
     deleteRecipe,
-    updateRecipe
+    updateRecipe,
+    searchRecipe
 } = require('../controllers/recipe.controller');
 
 // Express router
@@ -26,17 +27,27 @@ router
         path: 'recipe',
         select: 'title description servings'
     }), getRecipes)
-    .post(protect, authorization('admin'), createRecipe)
+    .post(protect, authorization('admin', 'user'), createRecipe)
 
 router
     .route('/my')
-    .get(protect, authorization('admin'), getMyPublicRecipe)
+    .get(protect, authorization('admin'),advanceResults(Recipe, {
+        path: 'recipe',
+        select: 'title description servings'
+    }), getMyPublicRecipe)
+
+router
+    .route('/search')
+    .get(advanceResults(Recipe, {
+        path: 'recipe',
+        select: 'title description servings'
+    }), searchRecipe)
 
 router
     .route('/:id')
     .get(getRecipe)
-    .delete(protect, authorization('admin'), deleteRecipe)
-    .put(protect, authorization('admin'), updateRecipe)
+    .delete(protect, authorization('admin','user'), deleteRecipe)
+    .put(protect, authorization('admin','user'), updateRecipe)
 
 
 
