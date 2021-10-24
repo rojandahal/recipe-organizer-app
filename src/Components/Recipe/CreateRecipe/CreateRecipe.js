@@ -1,14 +1,15 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Redirect } from "react-router";
+import Logo from "../../../assets/images/ro.png";
 
 const CreateRecipe = () => {
   const [error, setError] = useState();
   const [title, settitle] = useState();
   const [description, setDescription] = useState();
   const [servings, setservings] = useState();
-  const [ingredientTitle, setIngredentTitle] = useState();
-  const [quantity, setQuantity] = useState();
+  const [ingredientname, setIngredentname] = useState("");
+  const [quantity, setQuantity] = useState("");
   const [unit, setunit] = useState();
   const [steps, setsteps] = useState("");
   const [notes, setnotes] = useState();
@@ -32,7 +33,7 @@ const CreateRecipe = () => {
   };
 
   const ingredientTitleHandler = (event) => {
-    setIngredentTitle(event.target.value);
+    setIngredentname(event.target.value);
   };
 
   const quantityHandler = (event) => {
@@ -61,11 +62,9 @@ const CreateRecipe = () => {
 
   const submitHandler = async () => {
     const data = {
-      ingredients: {
-        name: ingredientTitle,
-        quantity: quantity,
-        unit: unit,
-      },
+      ingredientname,
+      unit,
+      quantity,
       title,
       description,
       image: "no-photo.jpg",
@@ -73,8 +72,8 @@ const CreateRecipe = () => {
       notes,
       servings,
       ispublic: true,
-      averageRating,
-      review,
+      averageRating: 5,
+      review: "Null",
     };
     axios
       .post("http://localhost:3000/api/v1/recipe", data, {
@@ -94,107 +93,95 @@ const CreateRecipe = () => {
     return <Redirect to="/" />;
   } else {
     return (
-      <div className="Singup">
-        {error}
-        <h3 className="title">Create recipe</h3>
-        <div>
-          <h4 className="label">Recipe title</h4>
-          <input
-            type="text"
-            name="InputName"
-            placeholder="Recipe Title"
-            onChange={titleHandler}
-          ></input>
-        </div>
-        <div>
-          <h4 className="label">Recipe description</h4>
-          <input
-            type="text"
-            name="InputName"
-            placeholder="Recipe Description"
-            onChange={descriptionHandler}
-          ></input>
-        </div>
-        <div>
-          <h4 className="label">Servings</h4>
-          <input
-            type="text"
-            name="InputName"
-            placeholder="Servings"
-            onChange={servingsHandler}
-          ></input>
-        </div>
-        <div title="Ingredients">
-          <div>
-            <h4 className="label">Ingredient Title</h4>
-            <input
-              type="text"
-              name="InputName"
-              placeholder="Ingredient Title"
-              onChange={ingredientTitleHandler}
-            ></input>
-          </div>
-          <div>
-            <h4 className="label">Quantity</h4>
-            <input
-              type="text"
-              name="InputName"
-              placeholder="Quantity"
-              onChange={quantityHandler}
-            ></input>
-          </div>
-          <div>
-            <h4 className="label">Units</h4>
-            <input
-              type="text"
-              name="InputName"
-              placeholder="Units"
-              onChange={unitHandler}
-            ></input>
-          </div>
-        </div>
+      <div className="signupform">
+        <div class="ui middle aligned center aligned grid">
+          <div class="column">
+            <h2 class="ui teal image header">
+              <img src={Logo} class="image" alt="logo" />
+              <div class="content">Create Your Recipe</div>
+            </h2>
+            <div class="ui form">
+              <div class="field">
+                <label>Recipe Title</label>
+                <input
+                  placeholder="Recipe Title"
+                  type="text"
+                  onChange={titleHandler}
+                />
+              </div>
 
-        <div>
-          <h4 className="label">steps</h4>
-          <input
-            type="text"
-            name="InputName"
-            placeholder="Steps"
-            onChange={stepsHandler}
-          ></input>
-        </div>
-        <div>
-          <h4 className="label">Notes</h4>
-          <input
-            type="text"
-            name="InputName"
-            placeholder="Notes"
-            onChange={notesHandler}
-          ></input>
-        </div>
-        <div>
-          <h4 className="label">Rating</h4>
-          <input
-            type="text"
-            name="InputName"
-            placeholder="Rating"
-            onChange={averageRatingHandler}
-          ></input>
-        </div>
-        <div>
-          <h4 className="label">Review</h4>
-          <input
-            type="text"
-            name="InputName"
-            placeholder="Units"
-            onChange={reviewHandler}
-          ></input>
-        </div>
+              <div class="field">
+                <label>Recipe Description</label>
+                <input
+                  placeholder="Description"
+                  type="text"
+                  onChange={descriptionHandler}
+                />
+              </div>
 
-        <div>
-          <button type="submit" onClick={submitHandler}>
-            Create Recipe
-          </button>
+              <div class="field">
+                <label>Servings</label>
+                <input
+                  placeholder="Servings"
+                  type="text"
+                  onChange={servingsHandler}
+                />
+              </div>
+
+              <div class="field">
+                <label>Ingredient Title</label>
+                <input
+                  placeholder="Ingredient Title"
+                  type="text"
+                  onChange={ingredientTitleHandler}
+                />
+              </div>
+
+              <div class="field">
+                <label>Quantity</label>
+                <input
+                  placeholder="Quantity"
+                  type="text"
+                  onChange={quantityHandler}
+                />
+              </div>
+
+              <div class="field">
+                <label>Units of Quantity</label>
+                <input
+                  placeholder="Units"
+                  type="text"
+                  onChange={unitHandler}
+                />
+              </div>
+
+              <div class="field">
+                <label>Steps</label>
+                <input
+                  placeholder="Steps"
+                  type="text"
+                  onChange={stepsHandler}
+                />
+              </div>
+
+              <div class="field">
+                <label>Notes</label>
+                <input
+                  placeholder="Notes"
+                  type="text"
+                  onChange={notesHandler}
+                />
+              </div>
+
+              <div
+                class="ui fluid large teal submit button"
+                type="submit"
+                onClick={submitHandler}
+              >
+                Create Recipe
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );

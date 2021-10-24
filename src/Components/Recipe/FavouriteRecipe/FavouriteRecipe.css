@@ -1,0 +1,68 @@
+.getfavrecipe {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  display: flex;
+  color: #fff;
+}
+
+.card {
+  margin: 1rem;
+  width: 25rem;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  margin: 3px;
+  background-color: #df6870;
+}
+
+.card img {
+  width: 20rem;
+  height: 12rem;
+}
+
+.card .btn-primary {
+  margin: 0;
+}
+
+.info {
+  padding: 2rem;
+}
+
+.image {
+  padding: 2rem;
+}
+
+.card li {
+  padding: 3px;
+  word-spacing: 5px;
+  letter-spacing: 1.3px;
+}
+
+.header {
+  color: white;
+  font-family: "Open Sans";
+  justify-content: center;
+}
+header:hover {
+  color: rgb(204, 204, 204);
+}
+.button {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 3px;
+  border-radius: 10px;
+}
+
+.username {
+  color: rgb(184, 184, 184);
+}
+
+.description {
+  padding: 2px;
+  margin: 10px;
+}

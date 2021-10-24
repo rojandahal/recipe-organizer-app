@@ -52,7 +52,7 @@ const GetAllRecipes = () => {
               <a
                 class=" medium header"
                 href="#"
-                onClick={() => onRecipeDetails(element._id)}
+                onClick={() => onRecipeDetails(element._id)}  
               >
                 {element.title}
               </a>

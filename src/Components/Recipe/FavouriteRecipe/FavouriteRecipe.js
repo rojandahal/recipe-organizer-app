@@ -32,7 +32,7 @@ const FavouriteRecipe = () => {
       })
       .then((response) => {
         console.log(response.data);
-        setMyrecipes(response.data.data);
+        window.location.reload(false);
       })
       .catch((error) => console.log(error));
   };
@@ -55,13 +55,13 @@ const FavouriteRecipe = () => {
               <a
                 class=" medium header"
                 href="#"
-                onClick={() => onRecipeDetails(element._id)}
+                onClick={() => onRecipeDetails(element.recipeid)}
               >
                 {element.title}
               </a>
               <div className="username">
                 <i class="user icon"></i>
-                {element.userfrom}
+                {element.username}
               </div>
               <div className="description">
                 <h4>
@@ -77,7 +77,7 @@ const FavouriteRecipe = () => {
                   More
                 </button>
               </div>
-              
+
               <button
                 class="fluid ui right labeled icon button"
                 onClick={() => onDeleteRecipe(element._id)}
@@ -97,6 +97,11 @@ const FavouriteRecipe = () => {
           myrecipesList
         ) : (
           <RecipeDetails id={recipeId} />
+        )}
+        {myrecipes.length === 0 ? (
+          <div class="ui header">No Favourite Recipes!</div>
+        ) : (
+          ""
         )}
       </div>
     </>

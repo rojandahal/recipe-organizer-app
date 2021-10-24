@@ -11,7 +11,7 @@ import CreateRecipe from "./Components/Recipe/CreateRecipe/CreateRecipe";
 import Home from "./containers/Home/Home";
 import GetAllRecipes from "./Components/Recipe/GetAllRecipes/GetAllRecipes";
 import FavouriteRecipe from "./Components/Recipe/FavouriteRecipe/FavouriteRecipe";
-import RecipeDetais from "./Components/Recipe/RecipeDetails/RecipeDetails";
+import RecipeDetails from "./Components/Recipe/RecipeDetails/RecipeDetails";
 
 function capitalize(s) {
   return s[0].toUpperCase() + s.slice(1);
@@ -58,7 +58,7 @@ function App() {
           exact
           component={() => <Signup isLogin={isLogginIn} />}
         />
-        <Route path="/recipe/details" exact component={RecipeDetais}/>
+        <Route path="/recipe/details" exact component={RecipeDetails} />
         <Route path="/recipe/favourites" exact component={FavouriteRecipe} />
         <Route path="/recipe" exact component={GetAllRecipes} />
         <Route path="/auth/recipe" exact component={CreateRecipe} />

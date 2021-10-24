@@ -7,6 +7,11 @@ const favouriteSchema = new Schema({
     type: String,
     required: true,
   },
+  username: {
+    type: String,
+    ref: "Users",
+    required: true,
+  },
   userfrom: {
     type: mongoose.Schema.ObjectId,
     ref: "Users",

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./Login.css";
 import Logo from "../../../assets/images/ro.png";
+import { Redirect } from "react-router";
 
 const Login = (props) => {
   console.log(props.isLogin);
@@ -40,7 +41,7 @@ const Login = (props) => {
       .catch((error) => console.log(error.message));
   };
   if (props.isLogin) {
-    return <div>You are logined!</div>;
+    return <Redirect to="/"></Redirect>
   } else {
     // HTML file to show to the user
     return (

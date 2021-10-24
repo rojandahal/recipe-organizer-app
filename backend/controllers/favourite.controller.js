@@ -8,7 +8,7 @@ const ApiError = require("../errors/ApiError");
 const Favourite = require("../models/favourite.model");
 
 //@des      Add to Favourite
-//@route    GET /api/v1/favourite/addToFavourite
+//@route    POST /api/v1/favourite/addToFavourite
 //@access   Public
 const addToFavouriteController = asyncHandler(async (req, res, next) => {
   req.body.userfrom = req.user.id;
