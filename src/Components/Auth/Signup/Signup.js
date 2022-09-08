@@ -54,7 +54,7 @@ const Signup = (props) => {
       password,
     };
     axios
-      .post("http://localhost:3000/api/v1/auth/register", data, {
+      .post("https://recipe-organizer-site.herokuapp.com/api/v1/auth/register", data, {
         withCredentials: true,
       })
       .then((response) => {

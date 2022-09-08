@@ -11,7 +11,7 @@ const FavouriteRecipe = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/v1/favourite/my", {
+      .get("https://recipe-organizer-site.herokuapp.com/api/v1/favourite/my", {
         headers: {
           "Content-Type": "application/json",
         },
@@ -27,7 +27,7 @@ const FavouriteRecipe = () => {
   const onDeleteRecipe = (id) => {
     console.log("Deleted Clicked!");
     axios
-      .delete(`http://localhost:3000/api/v1/favourite/${id}/`, {
+      .delete(`https://recipe-organizer-site.herokuapp.com/api/v1/favourite/${id}/`, {
         withCredentials: true,
       })
       .then((response) => {

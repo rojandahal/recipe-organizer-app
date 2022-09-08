@@ -23,7 +23,7 @@ function App() {
 
   const getMe = () => {
     axios
-      .get("http://localhost:3000/api/v1/auth/me", { withCredentials: true })
+      .get("https://recipe-organizer-site.herokuapp.com/api/v1/auth/me", { withCredentials: true })
       .then((response) => {
         setRole(response.data.data.role);
         console.log(role);

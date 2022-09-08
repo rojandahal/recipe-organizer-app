@@ -13,7 +13,7 @@ const GetUserRecipe = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/v1/recipe/my", {
+      .get("https://recipe-organizer-site.herokuapp.com/api/v1/recipe/my", {
         headers: {
           "Content-Type": "application/json",
         },

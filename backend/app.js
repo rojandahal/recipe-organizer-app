@@ -11,13 +11,15 @@ const app = express();
 
 //Body parser
 // Use of cors
-app.use(
-  cors({
-    origin: "http://localhost:3001",
-    methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD", "DELETE"],
-    credentials: true,
-  })
-);
+const corsOptions = {
+  origin: true,
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+  headers: "content-type",
+  methods: ["GET", "POST", "PUT", "DELETE"]
+};
+app.options("*",cors(corsOptions));
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Cookies parser
@@ -37,10 +39,10 @@ connection.once("open", () => {
 });
 
 //Routes files
-const usersRoutes = require("../backend/routes/users");
-const authRoutes = require("../backend/routes/auth");
-const recipeRoutes = require("../backend/routes/recipe");
-const favouriteRoutes = require ("../backend/routes/favourite");
+const usersRoutes = require("./routes/users");
+const authRoutes = require("./routes/auth");
+const recipeRoutes = require("./routes/recipe");
+const favouriteRoutes = require ("./routes/favourite");
 
 //Adding routes middleware
 app.use("/api/v1/user", usersRoutes);

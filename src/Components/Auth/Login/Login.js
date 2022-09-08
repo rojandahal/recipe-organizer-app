@@ -27,7 +27,7 @@ const Login = (props) => {
       password,
     };
     axios
-      .post("http://localhost:3000/api/v1/auth/login", data, {
+      .post("https://recipe-organizer-site.herokuapp.com/api/v1/auth/login", data, {
         headers: {
           "Content-Type": "application/json",
         },

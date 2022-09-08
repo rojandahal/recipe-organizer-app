@@ -76,7 +76,7 @@ const CreateRecipe = () => {
       review: "Null",
     };
     axios
-      .post("http://localhost:3000/api/v1/recipe", data, {
+      .post("https://recipe-organizer-site.herokuapp.com/api/v1/recipe", data, {
         withCredentials: true,
       })
       .then((response) => {

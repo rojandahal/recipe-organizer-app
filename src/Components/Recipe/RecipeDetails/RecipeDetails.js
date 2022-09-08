@@ -19,7 +19,7 @@ const RecipeDetais = (props) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/v1/recipe/${props.id}/`, {
+      .get(`https://recipe-organizer-site.herokuapp.com/api/v1/recipe/${props.id}/`, {
         headers: {
           "Content-Type": "application/json",
         },

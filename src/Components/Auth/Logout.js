@@ -11,7 +11,7 @@ const Logout = () => {
         expires: 1
     });
 
-    axios.get('http://localhost:3000/api/v1/auth/logout', {withCredentials: true})
+    axios.get('https://recipe-organizer-site.herokuapp.com/api/v1/auth/logout', {withCredentials: true})
     .then(response => {
         console.log(response.data);
         window.location.reload();
